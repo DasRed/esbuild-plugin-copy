@@ -1,0 +1,25 @@
+{
+    "name": "esbuild-copy-plugin",
+    "version": "1.0.0",
+    "description": "a copy plugin for esbuild",
+    "main": "./src/index.js",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DasRed/esbuild-plugin-copy.git"
+    },
+    "author": "Marco Starker",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/DasRed/esbuild-plugin-copy/issues"
+    },
+    "files": [
+        "/src/*"
+    ],
+    "homepage": "https://github.com/DasRed/esbuild-plugin-copy#readme",
+    "keywords": [
+        "esbuild",
+        "plugin",
+        "copy"
+    ]
+}
