@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: esbuild-copy-plugin per npm installieren, Voraussetzungen an Node.js und esbuild.
+description: esbuild-copy-plugin per npm als Dev-Abhängigkeit installieren, welche Versionen von Node.js und esbuild du brauchst und wie du prüfst, dass das Kopieren klappt.
 order: 10
 slug: installation
 section: Einstieg

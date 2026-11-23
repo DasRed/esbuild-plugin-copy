@@ -1,6 +1,6 @@
 ---
 title: Optionen
-description: Alle Optionen von esbuild-copy-plugin, das feste Kopierverhalten und die bekannten Grenzen.
+description: Die Optionen from und to von esbuild-copy-plugin, wie Ziele relativ zu outfile aufgelöst werden, das feste Kopierverhalten und die bekannten Grenzen.
 order: 30
 slug: optionen
 section: Referenz

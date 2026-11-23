@@ -1,6 +1,6 @@
 ---
 title: Verwendung
-description: Typische Einsätze von esbuild-copy-plugin – Ordner kopieren, einzelne Dateien, mehrere Quellen und Watch-Modus.
+description: Typische Einsätze von esbuild-copy-plugin, um statische Dateien neben das Bundle zu legen, in Unterordner, als Einzeldatei, aus mehreren Quellen und mit Watch.
 order: 20
 slug: verwendung
 section: Einstieg

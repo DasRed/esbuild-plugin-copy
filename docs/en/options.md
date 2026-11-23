@@ -1,6 +1,6 @@
 ---
 title: Options
-description: All options of esbuild-copy-plugin, the fixed copy behaviour and the known limitations.
+description: The from and to options of esbuild-copy-plugin, how targets are resolved relative to outfile, the fixed copy behaviour and the known limitations.
 order: 30
 slug: options
 section: Reference

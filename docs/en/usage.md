@@ -1,6 +1,6 @@
 ---
 title: Usage
-description: Typical uses of esbuild-copy-plugin – copying folders, single files, several sources and watch mode.
+description: Typical uses of esbuild-copy-plugin to put static files next to the bundle, with subfolders, single files, several sources, esbuild-plugin-clear and watch mode.
 order: 20
 slug: usage
 section: Getting started
