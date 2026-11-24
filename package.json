@@ -16,7 +16,7 @@
     "files": [
         "/src/*"
     ],
-    "homepage": "https://github.com/DasRed/esbuild-plugin-copy#readme",
+    "homepage": "https://www.marco-starker.de/en/projects/esbuild-plugin-copy/docs",
     "keywords": [
         "esbuild",
         "plugin",
