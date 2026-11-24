@@ -1,6 +1,6 @@
 {
     "name": "esbuild-copy-plugin",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "a copy plugin for esbuild",
     "main": "./src/index.js",
     "type": "module",
