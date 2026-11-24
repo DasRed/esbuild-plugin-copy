@@ -1,7 +1,7 @@
 # esbuild-plugin-copy
 
-esbuild plugin that copies a folder or a file into the output directory after every build, e.g. static assets from
-`public/`.
+esbuild plugin that copies folders or files into the output directory after every successful build, e.g. static
+assets from `public/`. Ships as ESM and CommonJS with TypeScript types.
 
 Documentation: https://www.marco-starker.de/en/projects/esbuild-plugin-copy/docs
 (Deutsch: https://www.marco-starker.de/de/projekte/esbuild-plugin-copy/doku)
@@ -26,8 +26,18 @@ await esbuild.build({
 });
 ```
 
-The contents of `public/` end up next to `dist/index.js`. The plugin requires `outfile` (not `outdir`) and Node.js
-16.7 or later.
+The contents of `public/` end up next to `dist/index.js`. The plugin works with `outfile` and `outdir`, and takes an
+array to copy several sources.
+
+## Local development
+
+```bash
+npm ci
+npm test
+npm run build
+```
+
+The package itself runs on Node.js 22.13 or later. Building and testing need Node.js 22.18 or later.
 
 ## License
 

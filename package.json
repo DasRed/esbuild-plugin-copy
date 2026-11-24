@@ -1,25 +1,61 @@
 {
     "name": "esbuild-copy-plugin",
     "version": "1.0.2",
-    "description": "a copy plugin for esbuild",
-    "main": "./src/index.js",
+    "description": "esbuild plugin that copies folders and files into the output folder after every build",
     "type": "module",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/DasRed/esbuild-plugin-copy.git"
-    },
     "author": "Marco Starker",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/DasRed/esbuild-plugin-copy/issues"
     },
-    "files": [
-        "/src/*"
-    ],
     "homepage": "https://www.marco-starker.de/en/projects/esbuild-plugin-copy/docs",
+    "engines": {
+        "node": ">=22.13.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DasRed/esbuild-plugin-copy.git"
+    },
     "keywords": [
         "esbuild",
         "plugin",
-        "copy"
-    ]
+        "copy",
+        "assets"
+    ],
+    "sideEffects": false,
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            },
+            "require": {
+                "types": "./dist/index.d.cts",
+                "default": "./dist/index.cjs"
+            }
+        },
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "dist/*"
+    ],
+    "scripts": {
+        "build": "tsdown",
+        "test": "vitest run",
+        "coverage": "vitest run --coverage --reporter=default --reporter=junit --outputFile.junit=coverage/reports/unittest.xml"
+    },
+    "peerDependencies": {
+        "esbuild": ">=0.19.0"
+    },
+    "devDependencies": {
+        "@types/node": "^26.6.6",
+        "@vitest/coverage-v8": "^5.1.1",
+        "esbuild": "^0.28.2",
+        "tsdown": "^0.23.7",
+        "typescript": "^7.0.2",
+        "vitest": "^5.1.1"
+    }
 }

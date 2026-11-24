@@ -1,13 +1,13 @@
 ---
 title: Verwendung
-description: Typische Einsätze von esbuild-copy-plugin, um statische Dateien neben das Bundle zu legen, in Unterordner, als Einzeldatei, aus mehreren Quellen und mit Watch.
+description: Typische Einsätze von esbuild-copy-plugin: statische Dateien neben dem Bundle, Unterordner, Einzeldateien, mehrere Quellen, outdir, clear und Watch-Modus.
 order: 20
 slug: verwendung
 section: Einstieg
 ---
 
 Du rufst `copy({from, to})` auf und gibst das Ergebnis in `plugins` an esbuild. `from` ist die Quelle, `to` das Ziel
-im Ordner von `outfile`. Was die beiden Werte genau bedeuten, steht unter [Optionen](options.md).
+im Ausgabeordner. Was die beiden Werte genau bedeuten, steht unter [Optionen](options.md).
 
 ## Statische Dateien neben das Bundle legen
 
@@ -22,12 +22,28 @@ await esbuild.build({
     bundle:      true,
     outfile:     './dist/index.js',
     plugins:     [
-        copy({from: './public', to: '.'}),
+        copy({from: './public'}),
     ],
 });
 ```
 
-Aus `public/index.html` und `public/img/logo.svg` werden `dist/index.html` und `dist/img/logo.svg`.
+Aus `public/index.html` und `public/img/logo.svg` werden `dist/index.html` und `dist/img/logo.svg`. Ohne `to` kopiert
+das Plugin direkt in den Ausgabeordner, wie mit `to: '.'`.
+
+## Mit outdir
+
+Das Plugin nimmt `outdir`, wenn es gesetzt ist, sonst den Ordner von `outfile`:
+
+```js
+await esbuild.build({
+    entryPoints: ['./src/index.js', './src/admin.js'],
+    bundle:      true,
+    outdir:      './dist',
+    plugins:     [
+        copy({from: './public'}),
+    ],
+});
+```
 
 ## In einen Unterordner kopieren
 
@@ -39,27 +55,32 @@ Der Inhalt von `assets/` landet in `dist/static/`. Fehlende Ordner legt das Plug
 
 ## Eine einzelne Datei kopieren
 
-Bei einer Datei gibst du in `to` den Dateinamen im Ziel an:
+Bei einer Datei ist `to` entweder der neue Dateiname oder ein Ordner:
 
 ```js
 copy({from: './config/robots.production.txt', to: 'robots.txt'})
+copy({from: './favicon.ico', to: '.'})
 ```
 
-> [!WARNING]
-> `to: '.'` funktioniert bei einer einzelnen Datei nicht. Node.js versucht dann, den Ausgabeordner durch die Datei zu
-> ersetzen, und der Build bricht mit „Cannot overwrite directory“ ab.
+Der erste Aufruf schreibt `dist/robots.txt`, der zweite `dist/favicon.ico`. Ist `to` ein vorhandener Ordner, behält
+die Datei darin ihren Namen.
 
 ## Mehrere Quellen
 
-Ein Aufruf kopiert genau eine Quelle. Für mehrere trägst du das Plugin mehrfach ein:
+Übergibst du ein Array, kopiert ein Plugin mehrere Quellen. Sie werden in dieser Reihenfolge kopiert, eine spätere
+Quelle kann also Dateien einer früheren überschreiben:
 
 ```js
 plugins: [
-    copy({from: './public', to: '.'}),
-    copy({from: './node_modules/some-lib/dist/fonts', to: 'fonts'}),
-    copy({from: './config/robots.production.txt', to: 'robots.txt'}),
+    copy([
+        {from: './public'},
+        {from: './node_modules/some-lib/dist/fonts', to: 'fonts'},
+        {from: './config/robots.production.txt', to: 'robots.txt'},
+    ]),
 ],
 ```
+
+Das Plugin mehrfach einzutragen geht ebenfalls.
 
 ## Zusammen mit esbuild-plugin-clear
 
@@ -76,15 +97,16 @@ await esbuild.build({
     bundle:      true,
     outfile:     './dist/index.js',
     plugins:     [
-        clear('./dist'),
-        copy({from: './public', to: '.'}),
+        clear(),
+        copy({from: './public'}),
     ],
 });
 ```
 
 ## Watch-Modus
 
-Mit `esbuild.context()` und `watch()` kopiert das Plugin nach jedem Rebuild erneut, und zwar immer die komplette Quelle.
+Mit `esbuild.context()` und `watch()` kopiert das Plugin nach jedem erfolgreichen Rebuild erneut, und zwar immer die
+komplette Quelle.
 
 ```js
 const ctx = await esbuild.context({
@@ -92,7 +114,7 @@ const ctx = await esbuild.context({
     bundle:      true,
     outfile:     './dist/index.js',
     plugins:     [
-        copy({from: './public', to: '.'}),
+        copy({from: './public'}),
     ],
 });
 

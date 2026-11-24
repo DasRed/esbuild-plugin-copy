@@ -3,4 +3,5 @@
 /.idea
 /log
 /dist
+/coverage
 test.js

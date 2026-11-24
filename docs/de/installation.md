@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: esbuild-copy-plugin per npm als Dev-Abhängigkeit installieren, welche Versionen von Node.js und esbuild du brauchst und wie du prüfst, dass das Kopieren klappt.
+description: esbuild-copy-plugin per npm installieren, welche Versionen von Node.js und esbuild du brauchst und wie du es als ESM, CommonJS oder in TypeScript lädst.
 order: 10
 slug: installation
 section: Einstieg
@@ -14,7 +14,7 @@ Das Plugin brauchst du nur beim Bauen, also als Dev-Abhängigkeit.
 npm i -D esbuild-copy-plugin
 ```
 
-esbuild bringt das Plugin nicht mit. Falls es noch fehlt:
+esbuild ist eine Peer-Abhängigkeit. Falls es noch fehlt:
 
 ```bash
 npm i -D esbuild
@@ -22,21 +22,32 @@ npm i -D esbuild
 
 ## Voraussetzungen
 
-| Was     | Version             | Warum                                                          |
-|---------|---------------------|----------------------------------------------------------------|
-| Node.js | ab 16.7, besser 18+ | Das Plugin kopiert mit `fs.cpSync`, das es erst ab 16.7 gibt    |
-| esbuild | mit Plugin-API      | Getestet mit 0.28; gebraucht wird nur `onEnd`                  |
+| Was     | Version     | Warum                                                          |
+|---------|-------------|----------------------------------------------------------------|
+| Node.js | ab 22.13    | Mindestversion in `engines`, älteste unterstützte LTS-Linie    |
+| esbuild | ab 0.19     | Peer-Abhängigkeit, getestet mit 0.28; gebraucht wird nur `onEnd` |
 
-> [!NOTE]
-> Das Paket ist reines ESM und hat nur einen Default-Export. Schreib dein Build-Skript als `.mjs` oder setz
-> `"type": "module"` in deiner `package.json`.
+Zur Laufzeit hat das Paket keine Abhängigkeiten.
 
-## Prüfen
+## Import
 
-Leg ein kleines Build-Skript an, zum Beispiel `build.mjs`, wie im Beispiel unter [Verwendung](usage.md), und starte es:
+Das Paket gibt es als ES-Modul und als CommonJS, jeweils mit eigenen Typdefinitionen.
 
-```bash
-node build.mjs
+```js
+import copy from 'esbuild-copy-plugin';
 ```
 
-Liegen danach deine Dateien in `dist/`, passt alles.
+```js
+const copy = require('esbuild-copy-plugin').default;
+```
+
+In CommonJS liegt der Default-Export unter `.default`, neben den Typ-Exporten. TypeScript und Bundler erledigen
+das bei `import … from` für dich.
+
+In TypeScript bekommst du den Typ der Optionen als benannten Typ-Export:
+
+```ts
+import copy, {type CopyPluginOptionInterface} from 'esbuild-copy-plugin';
+
+const options: CopyPluginOptionInterface = {from: './public', to: '.'};
+```
