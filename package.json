@@ -1,6 +1,6 @@
 {
     "name": "esbuild-copy-plugin",
-    "version": "1.0.2",
+    "version": "2.0.0",
     "description": "esbuild plugin that copies folders and files into the output folder after every build",
     "type": "module",
     "author": "Marco Starker",

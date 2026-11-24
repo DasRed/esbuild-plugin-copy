@@ -1,3 +1,13 @@
+## [2.0.0](https://github.com/DasRed/esbuild-plugin-copy/compare/v1.0.2...v2.0.0) (2026-11-24)
+
+### ⚠ BREAKING CHANGES
+
+* from resolves against absWorkingDir, absolute or escaping targets fail the build, nothing is copied after a failed build, CommonJS exposes the default export as require(…).default and Node.js >=22.13.0 is required.
+
+### Features
+
+* rewrite in TypeScript with ESM/CJS builds, types, outdir and several sources ([bb026df](https://github.com/DasRed/esbuild-plugin-copy/commit/bb026df1973c568036b87b6f058e7fca05d1495c))
+
 ## [1.0.2](https://github.com/DasRed/esbuild-plugin-copy/compare/v1.0.1...v1.0.2) (2026-11-24)
 
 ### Bug Fixes
